@@ -66,12 +66,12 @@
       <section class="hero" id="home">
         <!-- Geometric Animals - Left Dog -->
         <div class="geometric-animal geometric-dog">
-          <img src="/Dog.png" alt="Geometric Dog" class="animal-image">
+          <img src="./Dog.png" alt="Geometric Dog" class="animal-image">
         </div>
 
         <!-- Geometric Animals - Right Cat -->
         <div class="geometric-animal geometric-cat">
-          <img src="/Cat.png" alt="Geometric Cat" class="animal-image">
+          <img src="./Cat.png" alt="Geometric Cat" class="animal-image">
         </div>
 
         <div class="hero-container">
@@ -120,25 +120,14 @@
           
           <div class="demo-video-container">
             <div class="video-wrapper">
-              <video 
-                class="demo-video" 
-                controls 
-                preload="metadata"
-                poster="/pawsistant-logo-final.svg"
-              >
-                <source src="/Pawsistant Demo Video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              
-              <!-- Video overlay with play button -->
-              <div class="video-overlay" id="video-overlay">
-                <div class="play-button" id="play-button">
-                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="12" fill="rgba(127, 90, 240, 0.9)"/>
-                    <polygon points="10,8 16,12 10,16" fill="white"/>
-                  </svg>
-                </div>
-              </div>
+              <iframe 
+                class="demo-video-iframe" 
+                src="https://www.youtube.com/embed/9T7Zs71aItA?rel=0&showinfo=0&modestbranding=1" 
+                title="Pawsistant Demo Video" 
+                frameborder="0" 
+                allowfullscreen
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share">
+              </iframe>
             </div>
             
             <div class="demo-features">

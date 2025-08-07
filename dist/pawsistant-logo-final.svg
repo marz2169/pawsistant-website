@@ -1,0 +1,55 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dog head outline -->
+  <path d="M100 40 
+           C 120 40, 140 50, 150 70
+           C 160 80, 160 90, 155 100
+           C 150 120, 130 140, 100 140
+           C 70 140, 50 120, 45 100
+           C 40 90, 40 80, 50 70
+           C 60 50, 80 40, 100 40 Z" 
+        fill="none" 
+        stroke="#8B5CF6" 
+        stroke-width="6" 
+        stroke-linejoin="round"/>
+  
+  <!-- Left ear -->
+  <path d="M 65 55 
+           C 50 35, 45 25, 55 20
+           C 65 25, 70 35, 75 50
+           C 72 52, 68 54, 65 55 Z" 
+        fill="none" 
+        stroke="#8B5CF6" 
+        stroke-width="6" 
+        stroke-linejoin="round"/>
+  
+  <!-- Right ear -->
+  <path d="M 135 55 
+           C 150 35, 155 25, 145 20
+           C 135 25, 130 35, 125 50
+           C 128 52, 132 54, 135 55 Z" 
+        fill="none" 
+        stroke="#8B5CF6" 
+        stroke-width="6" 
+        stroke-linejoin="round"/>
+  
+  <!-- Eyes -->
+  <circle cx="85" cy="75" r="4" fill="#8B5CF6"/>
+  <circle cx="115" cy="75" r="4" fill="#8B5CF6"/>
+  
+  <!-- Nose -->
+  <path d="M 100 90 
+           C 95 88, 90 92, 95 95
+           C 100 98, 105 95, 110 92
+           C 105 88, 100 90, 100 90 Z" 
+        fill="#8B5CF6"/>
+  
+  <!-- Mouth -->
+  <path d="M 100 95 
+           C 90 105, 80 110, 75 115
+           M 100 95 
+           C 110 105, 120 110, 125 115" 
+        stroke="#8B5CF6" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        fill="none"/>
+</svg>
