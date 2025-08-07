@@ -1,755 +1,700 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/pawsistant-icon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pawsistant - AI Call Assistant for Veterinary Clinics</title>
+    <meta name="description" content="Engaging owners in pet health with clinically validated technology. AI-powered call assistant for veterinary clinics.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-purple: #7f5af0;
-            --primary-teal: #00e599;
-            --accent-purple: #7f5af0;
-            --accent-teal: #00e599;
-            --dark-bg: #0f0f1a;
-            --secondary-bg: #1a1a2e;
-            --text-light: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.7);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            background: var(--dark-bg);
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 15, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--text-light);
-            text-decoration: none;
-        }
-
-        .logo-icon {
-            width: 40px;
-            height: 40px;
-        }
-
-        .dog-icon {
-            width: 100%;
-            height: 100%;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary-purple);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 0 80px;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f172a 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(127, 90, 240, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 30%, rgba(0, 229, 153, 0.1) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-        }
-
-        .highlight {
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-teal));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.6;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .cta-button.primary {
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-teal));
-            color: white;
-        }
-
-        .cta-button.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.3);
-        }
-
-        .cta-button.secondary {
-            background: transparent;
-            color: var(--text-light);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .cta-button.secondary:hover {
-            border-color: var(--primary-purple);
-            background: rgba(127, 90, 240, 0.1);
-        }
-
-        /* Demo Section */
-        .demo-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f172a 100%);
-        }
-
-        .demo-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .demo-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .demo-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .demo-video-container {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .youtube-embed {
-            position: relative;
-            width: 100%;
-            height: 0;
-            padding-bottom: 56.25%;
-            background: #000;
-            border-radius: 16px;
-            overflow: hidden;
-            margin-bottom: 3rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(127, 90, 240, 0.3);
-        }
-
-        .youtube-embed iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 16px;
-        }
-
-        .demo-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .demo-feature {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .demo-feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .demo-feature h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-        }
-
-        .demo-feature p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: var(--secondary-bg);
-        }
-
-        .features-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .features-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-
-        .features-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(127, 90, 240, 0.15);
-            border-color: rgba(127, 90, 240, 0.3);
-        }
-
-        .feature-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-teal));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-light);
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #0f172a 100%);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .contact-info h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-info p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            line-height: 1.6;
-        }
-
-        .contact-stats {
-            display: flex;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-purple);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-label {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .contact-form {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 3px rgba(127, 90, 240, 0.1);
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 14px 28px;
-            background: linear-gradient(135deg, var(--primary-purple), var(--primary-teal));
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(127, 90, 240, 0.3);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-title {
-                font-size: 2.5rem;
-            }
-
-            .contact-content {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-stats {
-                justify-content: center;
-            }
-        }
-
-        /* Animations */
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content {
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    
+
+  </head>
+  <body>
+    <div id="app">
+      <!-- Navigation -->
+      <nav class="navbar">
         <div class="nav-container">
-            <a href="#home" class="nav-logo">
-                <div class="logo-icon">
-                    <svg viewBox="0 0 32 32" class="dog-icon">
-                        <path d="M16 4c3.5 0 6.5 2.5 7.5 6l1.5 2c0.5 0.5 0.5 1.5 0 2l-1 1c-0.5 0.5-1.5 0.5-2 0l-0.5-0.5c-1 2-3 3.5-5.5 3.5s-4.5-1.5-5.5-3.5l-0.5 0.5c-0.5 0.5-1.5 0.5-2 0l-1-1c-0.5-0.5-0.5-1.5 0-2l1.5-2c1-3.5 4-6 7.5-6z" 
-                              fill="#7f5af0" opacity="0.9"/>
-                        <ellipse cx="12" cy="8" rx="2" ry="4" fill="#7f5af0" opacity="0.7" transform="rotate(-20 12 8)"/>
-                        <ellipse cx="20" cy="8" rx="2" ry="4" fill="#7f5af0" opacity="0.7" transform="rotate(20 20 8)"/>
-                        <circle cx="16" cy="14" r="1.5" fill="#00e599" opacity="0.8"/>
-                        <circle cx="13.5" cy="11" r="1" fill="rgba(255,255,255,0.9)"/>
-                        <circle cx="18.5" cy="11" r="1" fill="rgba(255,255,255,0.9)"/>
-                        <circle cx="13.5" cy="11" r="0.4" fill="#7f5af0"/>
-                        <circle cx="18.5" cy="11" r="0.4" fill="#7f5af0"/>
-                    </svg>
-                </div>
-                <span>Pawsistant</span>
-            </a>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#demo" class="nav-link">Demo</a></li>
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        Meet <span class="highlight">Riley</span>, Your AI Call Assistant
-                    </h1>
-                    <p class="hero-subtitle">
-                        Engaging owners in pet health with clinically validated technology. Our AI assistant handles calls 24/7, schedules appointments, and provides professional veterinary support.
-                    </p>
-                    <div class="hero-cta">
-                        <a href="#contact" class="cta-button primary">Book a Demo</a>
-                        <a href="#demo" class="cta-button secondary">Watch Demo</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <div style="width: 300px; height: 600px; background: linear-gradient(145deg, #2a2a3e, #1a1a2e); border-radius: 30px; margin: 0 auto; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border: 4px solid #333;">
-                        <div style="background: #000; height: 500px; margin: 20px; border-radius: 20px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;">
-                            <div style="text-align: center; color: white;">
-                                <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #7f5af0, #00e599); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 2rem;">🐕</div>
-                                <h3 style="margin: 0 0 5px 0; font-size: 1.2rem;">Sarah Johnson</h3>
-                                <p style="margin: 0; color: #999; font-size: 0.9rem;">Calling about Max</p>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 10px; color: #00e599; font-size: 0.9rem;">
-                                <div style="width: 8px; height: 8px; background: #00e599; border-radius: 50%; animation: pulse 1.5s infinite;"></div>
-                                Riley is handling this call
-                            </div>
-                            <div style="display: flex; gap: 20px; margin-top: 20px;">
-                                <button style="width: 60px; height: 60px; border-radius: 50%; background: #ff4757; border: none; color: white; font-size: 1.5rem; cursor: pointer;">📞</button>
-                                <button style="width: 60px; height: 60px; border-radius: 50%; background: #00e599; border: none; color: white; font-size: 1.5rem; cursor: pointer;">✓</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+          <div class="nav-logo">
+            <div class="logo-icon">
+              <svg viewBox="0 0 32 32" class="dog-icon">
+                <!-- Dog head -->
+                <path d="M16 4c3.5 0 6.5 2.5 7.5 6l1.5 2c0.5 0.5 0.5 1.5 0 2l-1 1c-0.5 0.5-1.5 0.5-2 0l-0.5-0.5c-1 2-3 3.5-5.5 3.5s-4.5-1.5-5.5-3.5l-0.5 0.5c-0.5 0.5-1.5 0.5-2 0l-1-1c-0.5-0.5-0.5-1.5 0-2l1.5-2c1-3.5 4-6 7.5-6z" 
+                      fill="url(#dogGradient)" opacity="0.9"/>
+                <!-- Dog ears -->
+                <ellipse cx="12" cy="8" rx="2" ry="4" fill="url(#dogGradient)" opacity="0.7" transform="rotate(-20 12 8)"/>
+                <ellipse cx="20" cy="8" rx="2" ry="4" fill="url(#dogGradient)" opacity="0.7" transform="rotate(20 20 8)"/>
+                <!-- Dog nose -->
+                <circle cx="16" cy="14" r="1.5" fill="var(--accent-teal)" opacity="0.8"/>
+                <!-- Dog eyes -->
+                <circle cx="13.5" cy="11" r="1" fill="rgba(255,255,255,0.9)"/>
+                <circle cx="18.5" cy="11" r="1" fill="rgba(255,255,255,0.9)"/>
+                <circle cx="13.5" cy="11" r="0.4" fill="rgba(127, 90, 240, 0.8)"/>
+                <circle cx="18.5" cy="11" r="0.4" fill="rgba(127, 90, 240, 0.8)"/>
+                
+                <!-- Gradient definition -->
+                <defs>
+                  <linearGradient id="dogGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:var(--accent-purple);stop-opacity:0.8" />
+                    <stop offset="100%" style="stop-color:var(--accent-teal);stop-opacity:0.6" />
+                  </linearGradient>
+                </defs>
+              </svg>
             </div>
+            <span class="logo-text">Pawsistant</span>
+          </div>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="#support" class="nav-link">Support</a></li>
+            <li class="nav-item"><a href="#analytics" class="nav-link">Analytics</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+          </ul>
+          <div class="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
         </div>
-    </section>
+      </nav>
 
-    <!-- Demo Section -->
-    <section class="demo-section" id="demo">
+      <!-- Hero Section -->
+      <section class="hero" id="home">
+        <!-- Geometric Animals - Left Dog -->
+        <div class="geometric-animal geometric-dog">
+          <img src="/Dog.png" alt="Geometric Dog" class="animal-image">
+        </div>
+
+        <!-- Geometric Animals - Right Cat -->
+        <div class="geometric-animal geometric-cat">
+          <img src="/Cat.png" alt="Geometric Cat" class="animal-image">
+        </div>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1 class="hero-title">
+              Engaging owners in pet health with clinically validated technology.
+            </h1>
+            
+            <!-- Floating AI Assistant Bot -->
+            <div class="floating-assistant">
+              <div class="voice-assistant-container">
+                <!-- Custom Voice Button (triggers VAPI call) -->
+                <div class="voice-wave-button" id="voice-wave-btn">
+                  <div class="wave-icon">
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                    <div class="wave-bar"></div>
+                  </div>
+                  </div>
+                </div>
+                
+                <div class="voice-assistant-arrow">
+                  <svg viewBox="0 0 100 50" class="arrow-svg">
+                    <path d="M10 25 Q30 5, 50 25 Q70 45, 90 25" stroke="rgba(127, 90, 240, 0.8)" stroke-width="2" fill="none" stroke-dasharray="5,5">
+                      <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
+                    </path>
+                    <polygon points="85,20 90,25 85,30" fill="rgba(127, 90, 240, 0.8)"/>
+                  </svg>
+                </div>
+                <div class="voice-assistant-text">Talk to Pawsistant!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demo Video Section -->
+      <section class="demo-section" id="demo">
         <div class="container">
-            <div class="demo-header">
-                <h2>See <span class="highlight">Riley</span> in Action</h2>
-                <p class="demo-subtitle">Watch how our AI assistant handles real veterinary clinic calls with intelligence and care.</p>
+          <div class="demo-header">
+            <h2>See <span class="highlight">Riley</span> in Action</h2>
+            <p class="demo-subtitle">Watch how our AI assistant handles real veterinary clinic calls with intelligence and care.</p>
+          </div>
+          
+          <div class="demo-video-container">
+            <div class="video-wrapper">
+              <video 
+                class="demo-video" 
+                controls 
+                preload="metadata"
+                poster="/pawsistant-logo-final.svg"
+              >
+                <source src="/Pawsistant Demo Video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              
+              <!-- Video overlay with play button -->
+              <div class="video-overlay" id="video-overlay">
+                <div class="play-button" id="play-button">
+                  <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="rgba(127, 90, 240, 0.9)"/>
+                    <polygon points="10,8 16,12 10,16" fill="white"/>
+                  </svg>
+                </div>
+              </div>
             </div>
             
-            <div class="demo-video-container">
-                <div class="youtube-embed">
-                    <iframe 
-                        width="800" 
-                        height="450" 
-                        src="https://www.youtube-nocookie.com/embed/9T7Zs71aItA?rel=0&showinfo=0&modestbranding=1" 
-                        title="Pawsistant AI Call Assistant Demo" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-                
-                <div class="demo-features">
-                    <div class="demo-feature">
-                        <div class="demo-feature-icon">🎤</div>
-                        <h3>Natural Voice Interaction</h3>
-                        <p>Riley understands and responds to natural speech patterns</p>
-                    </div>
-                    <div class="demo-feature">
-                        <div class="demo-feature-icon">📅</div>
-                        <h3>Smart Scheduling</h3>
-                        <p>Automatically manages appointments and availability</p>
-                    </div>
-                    <div class="demo-feature">
-                        <div class="demo-feature-icon">🔬</div>
-                        <h3>Veterinary Expertise</h3>
-                        <p>Trained specifically for veterinary practice needs</p>
-                    </div>
-                </div>
+            <div class="demo-features">
+              <div class="demo-feature">
+                <div class="demo-feature-icon">🎤</div>
+                <h4>Natural Voice Interaction</h4>
+                <p>Riley understands and responds to natural speech patterns</p>
+              </div>
+              
+              <div class="demo-feature">
+                <div class="demo-feature-icon">📅</div>
+                <h4>Smart Scheduling</h4>
+                <p>Automatically manages appointments and availability</p>
+              </div>
+              
+              <div class="demo-feature">
+                <div class="demo-feature-icon">🏥</div>
+                <h4>Veterinary Expertise</h4>
+                <p>Trained specifically for veterinary practice needs</p>
+              </div>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
+      <!-- Features Section -->
+      <section class="features-section" id="features">
         <div class="container">
-            <div class="features-header">
-                <h2>Comprehensive <span class="highlight">Solutions</span> for Modern Veterinary Practices</h2>
-                <p class="features-subtitle">Everything you need to streamline communication and enhance patient care</p>
+          <div class="features-header">
+            <h2>Pawsistant has got your <span class="highlight">front desk covered.</span></h2>
+            <p class="features-subtitle">The first AI that can intelligently navigate your veterinary practice management system.</p>
+          </div>
+          
+          <div class="features-grid">
+            <!-- Appointment Scheduling -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6" stroke="currentColor" stroke-width="2"/>
+                  <line x1="8" y1="2" x2="8" y2="6" stroke="currentColor" stroke-width="2"/>
+                  <line x1="3" y1="10" x2="21" y2="10" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Appointment Scheduling</h3>
+              <p>Balances new and existing appointments without double-booking</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 1:07</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 35%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- FAQ Assistant -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                  <path d="M9,9a3,3,0,0,1,6,0c0,2-3,3-3,3" stroke="currentColor" stroke-width="2"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>FAQ</h3>
+              <p>Knows all about your practice such as hours or services offered</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 0:57</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 25%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9 11H15" stroke="currentColor" stroke-width="2"/>
+                  <path d="M9 15H12" stroke="currentColor" stroke-width="2"/>
+                  <path d="M21 19H3C3 15.6863 5.68629 13 9 13H15C18.3137 13 21 15.6863 21 19Z" stroke="currentColor" stroke-width="2"/>
+                  <path d="M12 3C14.2091 3 16 4.79086 16 7V13H8V7C8 4.79086 9.79086 3 12 3Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Reminders</h3>
+              <p>Intelligently follow-up with your clients for preventive care</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 1:34</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 45%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Prescription Refill -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="currentColor" stroke-width="2"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Prescription Refill</h3>
+              <p>We generate 20 more Rx Refills per month for every 150 appointments</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 0:59</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 30%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Registration -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+                  <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                  <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Registration</h3>
+              <p>Don't send clients to your website for sign up</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 2:54</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 40%"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Routing -->
+            <div class="feature-card">
+              <div class="feature-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <h3>Emergency Routing</h3>
+              <p>Auto-detect emergencies and forwards your clients</p>
+              <div class="feature-demo">
+                <div class="demo-controls">
+                  <button class="play-btn">▶</button>
+                  <span class="demo-time">0:00 / 0:32</span>
+                </div>
+                <div class="demo-progress">
+                  <div class="progress-bar" style="width: 60%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Instant Support Section -->
+      <section class="instant-support" id="support">
+        <div class="container">
+          <div class="support-content">
+            <div class="support-text">
+              <h2>Instant support for each of your clients.</h2>
+              <p>No hold time. No playing phone tag. No unhappy clients. Pawsistant knows each client and can answer every question instantly and personalized.</p>
+              
+              <div class="support-stats">
+                <div class="stat">
+                  <div class="stat-number">75%</div>
+                  <div class="stat-label">less follow-ups due to unresolved questions</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-number">92%</div>
+                  <div class="stat-label">reduction in client wait times</div>
+                </div>
+              </div>
             </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📞</div>
-                    <h3>24/7 Availability</h3>
-                    <p>Never miss a call again. Riley handles inquiries around the clock, even during emergencies and after-hours.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
-                    <h3>Intelligent Scheduling</h3>
-                    <p>Smart appointment booking that understands your practice schedule and patient needs.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Medical Record Integration</h3>
-                    <p>Seamlessly integrates with your existing practice management system for complete patient records.</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">🚨</div>
-                    <h3>Emergency Protocol</h3>
-                    <p>Trained to recognize emergency situations and follow your clinic's specific protocols.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h2>Ready to Transform Your Practice?</h2>
-                    <p>Join hundreds of veterinary clinics already using Pawsistant to improve their patient communication and streamline operations.</p>
+            <div class="support-visual">
+              <div class="phone-mockup">
+                <div class="phone-screen">
+                  <div class="chat-header">
+                    <div class="chat-avatar"></div>
+                    <div class="chat-info">
+                      <div class="chat-name">Pawsistant Animal Clinic</div>
+                      <div class="chat-status">Online now</div>
+                    </div>
+                    <div class="chat-actions">
+                      <button class="video-call-btn">📹</button>
+                    </div>
+                  </div>
+                  
+                  <div class="chat-messages">
+                    <div class="message incoming">
+                      <div class="message-text">Hi Sarah, confirming your wellness exam for Pepper at Pawsistant Animal Clinic at 4pm tomorrow! 🐾</div>
+                      <div class="message-time">Today 3:38 PM</div>
+                    </div>
                     
-                    <div class="contact-stats">
-                        <div class="stat">
-                            <div class="stat-number">98%</div>
-                            <div class="stat-label">Client Satisfaction</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Availability</div>
-                        </div>
-                        <div class="stat">
-                            <div class="stat-number">500+</div>
-                            <div class="stat-label">Clinics Served</div>
-                        </div>
+                    <div class="message outgoing">
+                      <div class="message-text">Thanks!</div>
                     </div>
+                    
+                    <div class="message outgoing">
+                      <div class="message-text">Actually, would 5pm work as well? Something came up at 4pm</div>
+                    </div>
+                    
+                    <div class="message incoming">
+                      <div class="message-text">Unfortunately, we don't have a slot at 5pm but I can offer you a time the day after tomorrow. How about 5pm?</div>
+                    </div>
+                    
+                    <div class="message outgoing">
+                      <div class="message-text">Amazing thanks, 5pm works!</div>
+                    </div>
+                    
+                    <div class="message incoming">
+                      <div class="message-text">Great, I've rescheduled your appointment. Looking forward to welcoming you at our clinic!</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section class="analytics-section" id="analytics">
+        <div class="container">
+          <div class="analytics-content">
+            <div class="analytics-visual">
+              <div class="dashboard-mockup">
+                <div class="dashboard-header">
+                  <h3>Practice Analytics Dashboard</h3>
+                </div>
+                <div class="dashboard-charts">
+                  <div class="chart-container">
+                    <div class="chart-title">Call Volume Trends</div>
+                    <div class="line-chart"></div>
+                  </div>
+                  <div class="chart-container">
+                    <div class="chart-title">Appointment Conversions</div>
+                    <div class="bar-chart"></div>
+                  </div>
+                  <div class="metrics-grid">
+                    <div class="metric">
+                      <div class="metric-value">94%</div>
+                      <div class="metric-label">Call Resolution</div>
+                    </div>
+                    <div class="metric">
+                      <div class="metric-value">2.3s</div>
+                      <div class="metric-label">Avg Response Time</div>
+                    </div>
+                    <div class="metric">
+                      <div class="metric-value">847</div>
+                      <div class="metric-label">Calls This Month</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="analytics-text">
+              <h2>Turn Conversations into Revenue.</h2>
+              <p>Pawsistant meticulously examines every interaction. This analysis reveals which services are most sought after, identifies areas for enhancement, and uncovers what truly engages your clients.</p>
+              
+              <div class="analytics-stats">
+                <div class="stat">
+                  <div class="stat-number">100%</div>
+                  <div class="stat-label">of client interactions automatically analyzed</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-number">40hrs+</div>
+                  <div class="stat-label">of staff time saved per clinic each week</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Integration Process -->
+      <section class="integration-process" id="process">
+        <div class="container">
+          <h2>Integrate in minutes, <span class="highlight">save hours</span> every week.</h2>
+          <p class="process-subtitle">Pawsistant quickly and painlessly integrates with your existing phone system and PIMS — without disrupting how your front desk works.</p>
+          
+          <div class="process-steps">
+            <div class="step">
+              <div class="step-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="7.5,4.21 12,6.81 16.5,4.21" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="7.5,19.79 7.5,14.6 3,12" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="21,12 16.5,14.6 16.5,19.79" stroke="currentColor" stroke-width="2"/>
+                  <polyline points="12,22.81 12,17" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h3>1. First Call</h3>
+                <p>A 30-minute call to understand your clinic's operations. You'll receive your demo environment directly afterward.</p>
+              </div>
+            </div>
+            
+            <div class="step">
+              <div class="step-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h3>2. Customize + Train your AI</h3>
+                <p>Run 15-20 test calls to train your AI directly, labeling responses to improve the system until you're fully happy.</p>
+              </div>
+            </div>
+            
+            <div class="step">
+              <div class="step-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 17L17 7" stroke="currentColor" stroke-width="2"/>
+                  <path d="M7 7H17V17" stroke="currentColor" stroke-width="2"/>
+                </svg>
+              </div>
+              <div class="step-content">
+                <h3>3. Integration + go-live</h3>
+                <p>A final session to review feedback and connect Pawsistant with your phone provider and PIMS. Then, you're ready to launch!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="contact-section" id="contact">
+        <div class="container">
+          <div class="contact-content">
+            <div class="contact-text">
+              <h2>Let's chat!</h2>
+              <p>Anything unclear? We'd love to tell you more about Pawsistant and how we can set up a personalized AI Receptionist for you.</p>
+              
+              <div class="contact-benefits">
+                <div class="benefit-item">
+                  <div class="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M22 12h-4l-3 9L9 3l-3 9H2" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <span>30-minute free consultation</span>
                 </div>
                 
-                <div class="contact-form-container">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="clinic-name">Clinic Name</label>
-                            <input type="text" id="clinic-name" name="clinic-name" required>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="contact-name">Your Name</label>
-                                <input type="text" id="contact-name" name="contact-name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contact-email">Email</label>
-                                <input type="email" id="contact-email" name="contact-email" required>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="contact-phone">Phone Number</label>
-                            <input type="tel" id="contact-phone" name="contact-phone">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">Tell us about your practice</label>
-                            <textarea id="message" name="message" rows="4" placeholder="Number of staff, daily call volume, current challenges..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Schedule Demo</button>
-                    </form>
+                <div class="benefit-item">
+                  <div class="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <span>Custom AI training for your practice</span>
                 </div>
+                
+                <div class="benefit-item">
+                  <div class="benefit-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                      <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2"/>
+                      <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="2"/>
+                      <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                  </div>
+                  <span>No commitment, just answers</span>
+                </div>
+              </div>
             </div>
+            
+            <div class="contact-form-container">
+              <form class="contact-form" id="contact-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <input type="email" id="email" name="email" placeholder="Email Address" required>
+                </div>
+                
+                <div class="form-group">
+                  <input type="text" id="clinicName" name="clinicName" placeholder="Clinic Name" required>
+                </div>
+                
+                <div class="form-group">
+                  <input type="tel" id="phone" name="phone" placeholder="Phone Number (Optional)">
+                </div>
+                
+                <div class="form-group">
+                  <select id="clinicSize" name="clinicSize" required>
+                    <option value="">Select Clinic Size</option>
+                    <option value="small">Small Practice (1-3 vets)</option>
+                    <option value="medium">Medium Practice (4-10 vets)</option>
+                    <option value="large">Large Practice (10+ vets)</option>
+                    <option value="emergency">Emergency/Specialty Clinic</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <textarea id="message" name="message" placeholder="Tell us about your current call management challenges..." rows="4"></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                  <span class="btn-text">Get My Free Consultation</span>
+                  <svg class="btn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                </button>
+                
+                <p class="form-disclaimer">
+                  By submitting this form, you agree to receive communications from Pawsistant. We respect your privacy and will never share your information.
+                </p>
+              </form>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container">
+          <div class="footer-content">
+            <div class="footer-brand">
+              <img src="/pawsistant-logo-final.svg" alt="Pawsistant" class="footer-logo" height="60">
+              <p>AI-powered call assistant for veterinary clinics</p>
+              <div class="footer-contact">
+                <p>📧 hello@pawsistant.com</p>
+                <p>📞 (555) 123-PAWS</p>
+              </div>
+            </div>
+            
+            <div class="footer-links">
+              <div class="footer-column">
+                <h4>Product</h4>
+                <ul>
+                  <li><a href="#features">Features</a></li>
+                  <li><a href="#analytics">Analytics</a></li>
+                  <li><a href="#process">Integration</a></li>
+                  <li><a href="#support">Support</a></li>
+                </ul>
+              </div>
+              
+              <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                  <li><a href="#help">Help Center</a></li>
+                  <li><a href="#docs">Documentation</a></li>
+                  <li><a href="#contact">Contact</a></li>
+                  <li><a href="#training">Training</a></li>
+                </ul>
+              </div>
+              
+              <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                  <li><a href="#about">About</a></li>
+                  <li><a href="#careers">Careers</a></li>
+                  <li><a href="#privacy">Privacy Policy</a></li>
+                  <li><a href="#terms">Terms of Service</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          <div class="footer-bottom">
+            <p>&copy; 2025 Pawsistant. All rights reserved. | Revolutionizing veterinary communication with AI</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+    
+    <!-- VAPI Widget Integration -->
     <script>
-        // Simple smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+      // Simple VAPI integration without external dependencies
+      window.addEventListener('DOMContentLoaded', function() {
+        console.log('Creating VAPI call functionality...');
+        
+        // Create a floating button for voice calls
+        const vapiButton = document.createElement('button');
+        vapiButton.id = 'vapi-floating-button';
+        vapiButton.innerHTML = '🎤';
+        vapiButton.style.cssText = `
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background: linear-gradient(135deg, #7f5af0, #2cb67d);
+          border: none;
+          color: white;
+          font-size: 24px;
+          cursor: pointer;
+          box-shadow: 0 4px 20px rgba(127, 90, 240, 0.4);
+          z-index: 10000;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        `;
+        
+        vapiButton.addEventListener('mouseenter', function() {
+          this.style.transform = 'scale(1.1)';
+          this.style.boxShadow = '0 6px 25px rgba(127, 90, 240, 0.6)';
         });
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your interest! We will contact you soon to schedule a demo.');
-            this.reset();
+        
+        vapiButton.addEventListener('mouseleave', function() {
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = '0 4px 20px rgba(127, 90, 240, 0.4)';
         });
-
-        // Add some interactive effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate feature cards on hover
-            const featureCards = document.querySelectorAll('.feature-card');
-            featureCards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px) scale(1.02)';
-                });
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-
-            console.log('Pawsistant website loaded successfully!');
+        
+        vapiButton.addEventListener('click', function() {
+          console.log('VAPI button clicked - initiating call...');
+          
+          // For demo purposes, show an alert
+          // In production, this would connect to your actual VAPI service
+          this.innerHTML = '📞';
+          this.style.background = 'linear-gradient(135deg, #ff6b6b, #ee5a24)';
+          
+          setTimeout(() => {
+            alert('Connecting to Pawsistant AI Assistant...\n\nNote: This is a demo. In production, this would start a real voice call with your VAPI assistant using ID: 878e9782-b20d-4460-872f-f7ba920fd01c');
+            
+            // Reset button
+            this.innerHTML = '🎤';
+            this.style.background = 'linear-gradient(135deg, #7f5af0, #2cb67d)';
+          }, 500);
         });
+        
+        document.body.appendChild(vapiButton);
+        console.log('VAPI demo button created and added to page');
+        
+        // Make the button globally accessible
+        window.vapiTrigger = function() {
+          vapiButton.click();
+        };
+      });
     </script>
-</body>
+  </body>
 </html>
