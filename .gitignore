@@ -11,6 +11,22 @@ dist/
 .env.test.local
 .env.production.local
 
+# Secrets and API keys
+*secret*
+*SECRET*
+*key*
+*KEY*
+*.pem
+*.p12
+
+# Large files
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.m4v
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
