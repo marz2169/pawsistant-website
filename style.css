@@ -158,6 +158,22 @@ body {
   color: var(--text-primary);
 }
 
+/* Dashboard Link Special Styling */
+.dashboard-link {
+  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-teal) 100%);
+  color: white !important;
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.dashboard-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(127, 90, 240, 0.3);
+  color: white !important;
+}
+
 /* Hamburger Menu */
 .hamburger {
   display: none;
