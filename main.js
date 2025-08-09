@@ -67,8 +67,9 @@ window.addEventListener('scroll', () => {
 });
 
 /**
- * Demo Video Handler
+ * Demo Video Handler - Commented out for YouTube embed
  */
+/*
 const videoOverlay = document.getElementById('video-overlay');
 const playButton = document.getElementById('play-button');
 const demoVideo = document.querySelector('.demo-video');
@@ -90,6 +91,7 @@ if (demoVideo) {
     videoOverlay.style.display = 'flex';
   });
 }
+*/
 
 /**
  * Feature Demo Controls
