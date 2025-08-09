@@ -855,65 +855,174 @@ vapi-widget div[role="button"] {
 }
 
 /* Responsive Design for Call Interface */
+/* Enhanced Mobile Responsive Design - Sections & Components */
 @media (max-width: 768px) {
-  .call-content {
-    width: 95%;
-    margin: var(--spacing-lg);
+  /* Section Improvements */
+  .section {
+    padding: var(--spacing-3xl) 0;
   }
   
-  .call-body {
+  .section-title {
+    font-size: clamp(2rem, 6vw, 2.8rem);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* Features Grid Mobile */
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
+  }
+  
+  .feature-card {
+    text-align: center;
+    padding: var(--spacing-2xl) var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--radius-xl);
+    background: rgba(26, 26, 46, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--accent-purple);
+  }
+  
+  .feature-title {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-primary);
+  }
+  
+  .feature-description {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+  
+  /* Contact Form Mobile */
+  .contact-form {
+    margin: 0 var(--spacing-lg);
     padding: var(--spacing-xl);
   }
   
-  .avatar-circle {
-    width: 100px;
-    height: 100px;
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
   }
   
-  .avatar-icon {
-    font-size: 2.5rem;
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 1rem;
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
   }
   
-  .call-footer {
-    padding: var(--spacing-lg);
+  /* Analytics Dashboard Mobile */
+  .analytics-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+    padding: 0 var(--spacing-lg);
   }
   
-  .call-control-btn {
-    min-width: 60px;
-    padding: var(--spacing-md) var(--spacing-sm);
+  .analytics-card {
+    padding: var(--spacing-xl);
+    text-align: center;
   }
   
-  /* Voice Assistant Responsive */
+  /* Testimonials Mobile */
+  .testimonials-container {
+    padding: 0 var(--spacing-lg);
+  }
+  
+  .testimonial-card {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl);
+    text-align: center;
+  }
+  
+  /* Enhanced Voice Assistant Mobile */
+  .floating-assistant {
+    margin: var(--spacing-2xl) var(--spacing-lg);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+    background: rgba(26, 26, 46, 0.9);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(127, 90, 240, 0.2);
+  }
+  
   .voice-assistant-container {
     flex-direction: column;
-    gap: var(--spacing-lg);
-    margin: var(--spacing-xl) 0;
+    gap: var(--spacing-xl);
+    align-items: center;
   }
   
   .voice-wave-button {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--spacing-lg);
+    background: linear-gradient(135deg, var(--accent-purple) 0%, rgba(127, 90, 240, 0.8) 100%);
+    border: 3px solid rgba(127, 90, 240, 0.3);
+    box-shadow: 0 0 30px rgba(127, 90, 240, 0.4);
+  }
+  
+  .voice-wave-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(127, 90, 240, 0.6);
   }
   
   .voice-assistant-arrow {
     transform: rotate(90deg);
-    width: 60px;
+    width: 50px;
+    opacity: 0.6;
   }
   
   .voice-assistant-text {
-    font-size: 1rem;
+    font-size: 1.1rem;
     text-align: center;
+    line-height: 1.6;
+    max-width: 85%;
   }
   
-  .floating-assistant {
-    margin: var(--spacing-xl) 0;
+  .voice-assistant-text strong {
+    color: var(--accent-purple);
+    display: block;
+    margin-bottom: var(--spacing-sm);
+    font-size: 1.2rem;
   }
 }
 
-/* Responsive Design */
+/* Enhanced Mobile Responsive Design */
 @media (max-width: 768px) {
+  /* Navigation Improvements */
+  .nav-container {
+    padding: 0 var(--spacing-lg);
+    height: 70px;
+  }
+  
   .hamburger {
     display: flex;
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    transition: background-color 0.3s ease;
+  }
+  
+  .hamburger:hover {
+    background-color: rgba(127, 90, 240, 0.1);
   }
   
   .nav-menu {
@@ -921,12 +1030,15 @@ vapi-widget div[role="button"] {
     left: -100%;
     top: 70px;
     flex-direction: column;
-    background: var(--bg-secondary);
+    background: rgba(26, 26, 46, 0.98);
+    backdrop-filter: blur(20px);
     width: 100%;
+    height: calc(100vh - 70px);
     text-align: center;
-    transition: 0.3s;
-    padding: var(--spacing-xl) 0;
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: var(--spacing-2xl) 0;
     border-bottom: 1px solid var(--border-color);
+    overflow-y: auto;
   }
   
   .nav-menu.active {
@@ -934,7 +1046,36 @@ vapi-widget div[role="button"] {
   }
   
   .nav-item {
-    margin: var(--spacing-md) 0;
+    margin: var(--spacing-xl) 0;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-menu.active .nav-item {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  .nav-menu.active .nav-item:nth-child(1) { transition-delay: 0.1s; }
+  .nav-menu.active .nav-item:nth-child(2) { transition-delay: 0.2s; }
+  .nav-menu.active .nav-item:nth-child(3) { transition-delay: 0.3s; }
+  .nav-menu.active .nav-item:nth-child(4) { transition-delay: 0.4s; }
+  .nav-menu.active .nav-item:nth-child(5) { transition-delay: 0.5s; }
+  
+  .nav-link {
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: var(--spacing-lg);
+    display: block;
+    border-radius: var(--radius-lg);
+    margin: 0 var(--spacing-xl);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    background: rgba(127, 90, 240, 0.1);
+    color: var(--accent-purple);
   }
   
   .hamburger.active .bar:nth-child(2) {
@@ -953,21 +1094,42 @@ vapi-widget div[role="button"] {
   .geometric-animal {
     width: 180px;
     height: 180px;
-    opacity: 0.5;
+    opacity: 0.3;
   }
   
   .geometric-dog {
-    left: -2%;
-    top: 70%;
+    left: -10%;
+    top: 75%;
   }
   
   .geometric-cat {
-    right: -2%;
-    top: 30%;
+    right: -10%;
+    top: 25%;
+  }
+  
+  /* Hero Section Mobile Improvements */
+  .hero {
+    padding: var(--spacing-2xl) 0;
+    min-height: 100vh;
+  }
+  
+  .hero-container {
+    padding: 0 var(--spacing-lg);
+    margin-top: 70px;
   }
   
   .hero-title {
-    font-size: 2.5rem;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.1;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-2xl);
+    max-width: 95%;
+    line-height: 1.6;
+  }
   }
   
   .cta-button {
@@ -1001,17 +1163,71 @@ vapi-widget div[role="button"] {
   }
 }
 
+/* Enhanced Mobile Design for Small Screens */
 @media (max-width: 480px) {
+  /* Navigation for very small screens */
   .nav-container {
     padding: 0 var(--spacing-md);
+    height: 65px;
   }
   
+  .logo-text {
+    font-size: 1.3rem;
+  }
+  
+  .logo-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .nav-menu {
+    top: 65px;
+    height: calc(100vh - 65px);
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .nav-link {
+    font-size: 1.1rem;
+    margin: 0 var(--spacing-lg);
+    padding: var(--spacing-lg);
+    /* Enhanced touch targets */
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Hero Section for Small Screens */
   .hero-container {
     padding: 0 var(--spacing-md);
+    margin-top: 65px;
   }
   
   .hero-title {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xl);
+    line-height: 1.7;
+  }
+  
+  /* Enhanced CTA Button for Small Screens */
+  .cta-button {
+    width: 100%;
+    max-width: 260px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-lg);
+    /* Better touch target */
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
   }
   
   /* Hide geometric animals on very small screens */
@@ -1019,15 +1235,207 @@ vapi-widget div[role="button"] {
     display: none;
   }
   
+  /* Modal and Overlay Improvements */
   .modal-content {
     width: 95%;
-    margin: 20% auto;
+    margin: 10% auto;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+  }
+  
+  /* Voice Assistant Mobile Improvements */
+  .voice-wave-button {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto;
+    /* Better touch interaction */
+    min-height: 70px;
+    touch-action: manipulation;
+  }
+  
+  .voice-assistant-text {
+    font-size: 0.95rem;
+    padding: 0 var(--spacing-sm);
+    line-height: 1.7;
+  }
+  
+  /* Feature Cards Mobile */
+  .feature-card {
+    margin-bottom: var(--spacing-xl);
+    padding: var(--spacing-xl) var(--spacing-lg);
+  }
+  
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .feature-title {
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  .feature-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  /* Form Improvements */
+  .contact-form {
+    margin: 0 var(--spacing-md);
+    padding: var(--spacing-lg);
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* Prevents zoom on iOS */
+    min-height: 48px; /* Better touch targets */
+  }
+  
+  /* Button Improvements */
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: 1rem;
+    touch-action: manipulation;
+  }
+  
+  /* Section Spacing */
+  .section {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+    margin-bottom: var(--spacing-xl);
   }
 }
 
-/* Smooth scrolling */
-html {
+/* Mobile-First Utility Classes and Improvements */
+
+/* Prevent horizontal scroll on mobile */
+html, body {
+  overflow-x: hidden;
   scroll-behavior: smooth;
+}
+
+/* Better touch scrolling */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile-friendly text selection */
+::selection {
+  background: rgba(127, 90, 240, 0.3);
+  color: var(--text-primary);
+}
+
+/* Improved focus states for mobile accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+.nav-link:focus {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+/* Remove tap highlight on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text selection where needed */
+p, h1, h2, h3, h4, h5, h6, 
+input, textarea, 
+.selectable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Enhanced Mobile Performance */
+.nav-menu,
+.modal,
+.floating-assistant,
+.feature-card {
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Mobile-specific animations */
+@media (max-width: 768px) {
+  /* Reduce motion for better performance */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Enhanced scroll padding for mobile navigation */
+  html {
+    scroll-padding-top: 80px;
+  }
+  
+  /* Mobile-optimized container */
+  .mobile-container {
+    padding: 0 var(--spacing-lg);
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  /* Mobile section spacing */
+  .mobile-section {
+    padding: var(--spacing-2xl) var(--spacing-lg);
+  }
+  
+  /* Mobile-friendly card grid */
+  .mobile-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* iPhone specific improvements */
+@media only screen 
+  and (device-width : 375px) 
+  and (device-height : 667px) 
+  and (-webkit-device-pixel-ratio : 2) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}
+
+/* iPhone Plus specific improvements */
+@media only screen 
+  and (device-width : 414px) 
+  and (device-height : 736px) 
+  and (-webkit-device-pixel-ratio : 3) {
+  .hero-title {
+    font-size: 2.4rem;
+  }
 }
 
 /* Loading animation for logo */
